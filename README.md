@@ -1,16 +1,40 @@
-# Rust-Lab
+# Rust Exercises
 
-Prácticas de Rust organizadas en dos proyectos Cargo independientes: una aplicación de tareas por consola y un experimento de automatización gráfica.
+Two independent Cargo projects for practicing **Rust**: a command-line task manager and a Windows GUI automation experiment.
 
-## Estructura
+## Projects
 
-- [measure-monkey-bot](measure-monkey-bot)
-- [todo-app](todo-app)
+| Directory | What it demonstrates |
+| --- | --- |
+| [todo-app/](todo-app/) | Console input, structs, task state, and persistence to a text file. |
+| [measure-monkey-bot/](measure-monkey-bot/) | Screen/pointer automation using `autogui` and `winapi`. |
 
-## Preparación y uso
+Both manifests use the Rust 2018 edition. Install Rust and Cargo before working with either project.
 
-Para la aplicación de consola: `cd todo-app` y `cargo run`. Para compilar sin ejecutarla: `cargo check`. `measure-monkey-bot/` usa `autogui` y `winapi` y depende de Windows y de las coordenadas de pantalla; revisa su código antes de ejecutarlo.
+## Task manager
 
-## Validación y estado
+```sh
+cd todo-app
+cargo check
+cargo run
+```
 
-Esta guía se contrastó con el árbol de archivos y los manifiestos del repositorio. No se ha validado una ejecución completa contra servicios externos, bases de datos o hardware. Las versiones y los scripts mostrados describen el código actual; no implican que sus dependencias antiguas sigan siendo compatibles.
+The program creates or reads `todo.txt` in the current working directory. At the action prompt, enter:
+
+| Action | Next input |
+| --- | --- |
+| `create` | Task name. |
+| `complete` | Task name to mark complete. |
+| `delete` | Task name to remove. |
+| `show` | `all`, `completed`, or `todo`. |
+| `break` | Exits without requesting another value. |
+
+The interactive prompts remain in Spanish. The storage format uses `task:done` per line; malformed entries or task names containing the separator need additional validation.
+
+## GUI automation experiment
+
+The [measure-monkey-bot manifest](measure-monkey-bot/Cargo.toml) depends on Windows APIs. Review [its entry point](measure-monkey-bot/src/main.rs), coordinates, and platform requirements before running it. Compilation alone does not validate its behavior on your desktop.
+
+## Validation status
+
+These are learning exercises rather than a shared Cargo workspace. Run commands inside the selected project. This documentation update did not execute the GUI automation or establish compatibility with current versions of its dependencies.
